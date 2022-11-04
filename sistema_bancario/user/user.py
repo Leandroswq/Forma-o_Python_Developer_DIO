@@ -37,9 +37,9 @@ class User:
         print(self.__balance)
 
     def withdraw(self, amount: float) -> None:
-        if self.__withdraw_qtd >= 3:
+        if self.__withdraw_qtd >= self.__WITHDRAW_QTD_LIMIT:
             return print("Daily withdrawal limit reached, transaction denied")
-        if amount > 500:
+        if amount > self.__WITHDRAW_LIMIT:
             return print("The maximum withdrawal allowed is R$ 500.00")
         if self.__balance < amount:
             return print("insufficient funds")
