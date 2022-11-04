@@ -24,6 +24,12 @@ class User:
 
         return statement
 
+    def deposit(self, amount: float) -> None:
+        if amount <= 0:
+            return print("Deposit needs a positive amount")
+        self.__balance += amount
+        self.__statement.append(self.__add_statement__("Deposit", amount))
+
 
 if __name__ == "__main__":
     user = User(500, 300)
