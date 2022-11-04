@@ -15,6 +15,15 @@ class User:
     def statement(self):
         return self.__statement
 
+    def __add_statement__(self, type: str, amount: float):
+        statement = {
+            "type": type,
+            "amount": f"{amount:.2f}",
+            "total": f"{self.__balance:.2f}",
+        }
+
+        return statement
+
 
 if __name__ == "__main__":
     user = User(500, 300)
