@@ -18,37 +18,45 @@ class User:
 
     @property
     def statement(self):
-        return self.__statement
+        statement_strings = [
+            f"tipo: {s['type']} Valor: {s['amount']} Total: {s['total']}"
+            for s in self.__statement
+        ]
+        return "\n".join(statement_strings)
+
+    def format(self, value: float):
+        return f"R$ {value:.2f}"
 
     def __add_statement__(self, type: str, amount: float):
         statement = {
             "type": type,
-            "amount": f"{amount:.2f}",
-            "total": f"{self.__balance:.2f}",
+            "amount": self.format(amount),
+            "total": self.format(self.__balance),
         }
 
         self.__statement.append(statement)
 
     def deposit(self, amount: float) -> None:
         if amount <= 0:
-            return print("Deposit needs a positive amount")
+            return print(
+                "Operação inválida, o deposito precisa de um valor positivo"
+            )
         self.__balance += amount
-        self.__add_statement__("Deposit", amount)
-        print(self.__balance)
+        self.__add_statement__("Deposito", amount)
 
     def withdraw(self, amount: float) -> None:
         if self.__withdraw_qtd >= self.__WITHDRAW_QTD_LIMIT:
-            return print("Daily withdrawal limit reached, transaction denied")
+            return print("Operação negada, limite de saque atingido")
         if amount > self.__WITHDRAW_LIMIT:
-            return print("The maximum withdrawal allowed is R$ 500.00")
+            return print("Operação negada, o limite de saque é R$ 500.00")
         if self.__balance < amount:
-            return print("insufficient funds")
+            return print("Saldo insuficiente")
         self.__balance -= amount
-        self.__add_statement__("Withdraw", amount)
+        self.__add_statement__("Saque", amount)
 
 
 if __name__ == "__main__":
     user = User(500, 300, 3)
     user.deposit(300)
     user.withdraw(200)
-    print(user.balance, user.statement)
+    print(user.balance, user.statement, sep="\n")
