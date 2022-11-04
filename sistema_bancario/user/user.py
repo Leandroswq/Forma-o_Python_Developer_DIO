@@ -14,15 +14,19 @@ class User:
 
     @property
     def balance(self):
-        return self.__balance
+        return self.format(self.__balance)
 
     @property
     def statement(self):
-        statement_strings = [
-            f"tipo: {s['type']} Valor: {s['amount']} Total: {s['total']}"
-            for s in self.__statement
-        ]
-        return "\n".join(statement_strings)
+        if len(self.__statement) > 0:
+            statement_strings = [
+                f"tipo: {s['type']} Valor: {s['amount']} Total: {s['total']}"
+                for s in self.__statement
+            ]
+            statements = "\n".join(statement_strings)
+            return f"Operações: \n{statements} \nSaldo total: {self.balance}"
+
+        return "Não foram realizadas movimentações"
 
     def format(self, value: float):
         return f"R$ {value:.2f}"
@@ -52,6 +56,7 @@ class User:
         if self.__balance < amount:
             return print("Saldo insuficiente")
         self.__balance -= amount
+        self.__withdraw_qtd += 1
         self.__add_statement__("Saque", amount)
 
 
