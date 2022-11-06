@@ -29,7 +29,7 @@ def main():
 
         else:
             print(
-                "Operação invalida, por favor seleciona novamente a operação desejada"
+                "Operação invalida, por favor seleciona novamente a operação desejada"  # noqa:E501
             )
 
 
