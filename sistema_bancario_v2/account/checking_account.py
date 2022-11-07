@@ -26,7 +26,7 @@ class CheckingAccount(Account):
 
 
 if __name__ == "__main__":
-    Account = CheckingAccount(500, 500)
-    Account.deposit(300)
-    Account.withdraw(amount=200)
-    print(Account.balance, Account.statement, sep="\n")
+    account = CheckingAccount(500, 500)
+    account.deposit(300)
+    account.withdraw(amount=200)
+    print(account.balance, account.statement, sep="\n")
