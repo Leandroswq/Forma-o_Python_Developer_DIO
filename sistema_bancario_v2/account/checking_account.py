@@ -6,9 +6,12 @@ class CheckingAccount(Account):
         self,
         balance: float,
         withdraw_limit: float,
+        account_number,
+        *,
         withdraw_qtd_limit: int = 3,
+        branch: int = None,
     ) -> None:
-        Account.__init__(self, balance)
+        Account.__init__(self, balance, account_number, branch)
         self.__withdraw_qtd = 0
         self.__WITHDRAW_QTD_LIMIT = withdraw_qtd_limit
         self.__WITHDRAW_LIMIT = withdraw_limit
@@ -26,7 +29,7 @@ class CheckingAccount(Account):
 
 
 if __name__ == "__main__":
-    account = CheckingAccount(500, 500)
+    account = CheckingAccount(500, 500, 5)
     account.deposit(300)
     account.withdraw(amount=200)
     print(account.balance, account.statement, sep="\n")
