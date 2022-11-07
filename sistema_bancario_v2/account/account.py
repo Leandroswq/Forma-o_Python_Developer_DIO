@@ -1,13 +1,19 @@
-from abc import ABC
-
-
-class Account(ABC):
+class Account:
     def __init__(
-        self,
-        balance: float,
+        self, balance: float, account_number, branch: str = 1
     ) -> None:
         self.__balance = balance
         self.__statement = []
+        self.__branch = branch
+        self.__account_number = account_number
+
+    @property
+    def branch(self):
+        return f"{self.__branch:04}"
+
+    @property
+    def account_number(self):
+        return self.__account_number
 
     @property
     def balance(self):
